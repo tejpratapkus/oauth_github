@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oauth_github_sso
+    username: root
+    password: welcome@123
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: Iv1.443749900ede947d
+            clientSecret: 39cce54b0c80db2daed0a36ddc3e196631efcd82
+            #tokenUri: https://github.com/login/oauth/access_token
+            #authorizationUri: https://github.com/login/oauth/authorize
+            redirectUri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            clientAuthenticationScheme: form
+            clientName: Github
+            scope:
+              - user
+              - repo
+        provider:
+          github:
+            authorizationUri: https://github.com/login/oauth/authorize
+            tokenUri: https://github.com/login/oauth/access_token
+            userInfoUri: https://api.github.com/user
+            userNameAttribute: login
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+#http://localhost:8080/login/oauth2/code/github
+
